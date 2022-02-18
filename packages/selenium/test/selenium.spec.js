@@ -4,7 +4,7 @@ import { Builder, By, Key, Capabilities } from "selenium-webdriver";
 import assert from "assert";
 import { path } from "chromedriver";
 let driver = null;
-const chromeOptions = new chrome.Options().headless();
+const chromeOptions = new chrome.Options();//.headless();
 const URL = "https://www.google.com/webhp?hl=en";
 
 describe("Selenium", () => {
@@ -21,6 +21,8 @@ describe("Selenium", () => {
   });
 
   it("should render a message on a Google search result", async () => {
+    const elementBtn = await driver.findElement(By.id("L2AGLb"));
+    await elementBtn.click();
     const element = await driver.findElement(By.name("q"));
     await element.sendKeys("webdriver", Key.RETURN);
     const res = await driver.findElement(By.css(".LC20lb")).getText();
